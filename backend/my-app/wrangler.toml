@@ -1,0 +1,22 @@
+name = "my-app"
+compatibility_date = "2024-07-27"
+
+[vars]
+# MY_VAR = "my-variable"
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMjJkMDAwYTItNjg0OS00NGUxLWJiOTctYjAxOTA0OGU4MzNmIiwidGVuYW50X2lkIjoiZGI2YjFmNjcxMWNiMmI0Y2U5NTU0NTk3NzI2OTdjNjY4NTdjZTEwODA0Nzk4MTkwODA2NDVjOTk5Y2FmMGQyYiIsImludGVybmFsX3NlY3JldCI6Ijg1YjVjNGNjLTAwNDItNDNjOC04MGU2LTc2Mjk4MTkzNGMyOCJ9.Byl49kw7fJSHkTMy2fB9fBORnJFz6GyapYnR4UdMot4"
+MEDIUM_SECRET = "mediumsecret"
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
