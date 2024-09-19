@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign } from "hono/jwt";
+import {signupInput, signInInput} from "@akashgupta6/medium-common"
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -12,7 +13,14 @@ export const userRouter = new Hono<{
 
 userRouter.post("/signup", async (c) => {
   const body = await c.req.json();
-  console.log("body----", body, c.env.DATABASE_URL);
+  const {success} = signupInput.safeParse(body);
+
+  if(!success){
+      c.status(411);
+      return c.json({
+          msg: 'Inputs are incorrect'
+      })
+  }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
     datasourceUrl: c.env.DATABASE_URL, // typescript does not know the toml file so we have to write type for it
@@ -34,7 +42,9 @@ userRouter.post("/signup", async (c) => {
       c.env.MEDIUM_SECRET
     );
 
-    return c.text(jwt);
+    return c.json({
+        token: jwt
+    });
   } catch (err) {
     c.status(411);
     console.log("err", err);
@@ -44,6 +54,15 @@ userRouter.post("/signup", async (c) => {
 
 userRouter.post("/signin", async (c) => {
   const body = await c.req.json();
+  const {success} = signInInput.safeParse(body);
+
+  if(!success){
+      c.status(411);
+      return c.json({
+          msg: 'Inputs are incorrect'
+      })
+  }
+
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
     datasourceUrl: c.env.DATABASE_URL, // typescript does not know the toml file so we have to write type for it
@@ -68,7 +87,9 @@ userRouter.post("/signin", async (c) => {
       },
       c.env.MEDIUM_SECRET
     );
-    return c.text(jwt);
+    return c.json({
+        token: jwt
+    });
   } catch (err) {
     c.status(411);
     return c.text("Invalid Token");

@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign, verify } from "hono/jwt";
+import {createBlog, updateBlog} from "@akashgupta6/medium-common"
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -31,6 +32,14 @@ blogRouter.use("/*", async (c, next) => {
 
 blogRouter.post("/", async (c) => {
   const body = await c.req.json();
+  const {success} = createBlog.safeParse(body);
+
+  if(!success){
+      c.status(411);
+      return c.json({
+          msg: 'Inputs are incorrect'
+      })
+  }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
     datasourceUrl: c.env.DATABASE_URL, // typescript does not know the toml file so we have to write type for it
@@ -51,6 +60,14 @@ blogRouter.post("/", async (c) => {
 
 blogRouter.put("/", async (c) => {
   const body = await c.req.json();
+  const {success} = updateBlog.safeParse(body);
+
+  if(!success){
+      c.status(411);
+      return c.json({
+          msg: 'Inputs are incorrect'
+      })
+  }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
     datasourceUrl: c.env.DATABASE_URL, // typescript does not know the toml file so we have to write type for it
