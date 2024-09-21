@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign } from "hono/jwt";
-import {signupInput, signInInput} from "@akashgupta6/medium-common"
+import { signupInput, signInInput } from "@akashgupta6/medium-common";
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -13,13 +13,13 @@ export const userRouter = new Hono<{
 
 userRouter.post("/signup", async (c) => {
   const body = await c.req.json();
-  const {success} = signupInput.safeParse(body);
+  const { success } = signupInput.safeParse(body);
 
-  if(!success){
-      c.status(411);
-      return c.json({
-          msg: 'Inputs are incorrect'
-      })
+  if (!success) {
+    c.status(411);
+    return c.json({
+      msg: "Inputs are incorrect",
+    });
   }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
@@ -43,7 +43,7 @@ userRouter.post("/signup", async (c) => {
     );
 
     return c.json({
-        token: jwt
+      token: jwt,
     });
   } catch (err) {
     c.status(411);
@@ -54,13 +54,13 @@ userRouter.post("/signup", async (c) => {
 
 userRouter.post("/signin", async (c) => {
   const body = await c.req.json();
-  const {success} = signInInput.safeParse(body);
+  const { success } = signInInput.safeParse(body);
 
-  if(!success){
-      c.status(411);
-      return c.json({
-          msg: 'Inputs are incorrect'
-      })
+  if (!success) {
+    c.status(411);
+    return c.json({
+      msg: "Inputs are incorrect",
+    });
   }
 
   const prisma = new PrismaClient({
@@ -88,7 +88,7 @@ userRouter.post("/signin", async (c) => {
       c.env.MEDIUM_SECRET
     );
     return c.json({
-        token: jwt
+      token: jwt,
     });
   } catch (err) {
     c.status(411);

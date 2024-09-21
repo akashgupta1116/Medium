@@ -11,7 +11,8 @@ const Signup = () => {
       "http://localhost:8787/api/v1/user/signup",
       obj
     );
-    localStorage.setItem("token", resp.token);
+    console.log('resp-->', resp)
+    localStorage.setItem("token", resp.data.token);
     navigate("/blogs");
   };
   return (

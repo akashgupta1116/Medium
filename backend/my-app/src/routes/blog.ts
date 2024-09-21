@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign, verify } from "hono/jwt";
-import {createBlog, updateBlog} from "@akashgupta6/medium-common"
+import { createBlog, updateBlog } from "@akashgupta6/medium-common";
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -32,13 +32,13 @@ blogRouter.use("/*", async (c, next) => {
 
 blogRouter.post("/", async (c) => {
   const body = await c.req.json();
-  const {success} = createBlog.safeParse(body);
+  const { success } = createBlog.safeParse(body);
 
-  if(!success){
-      c.status(411);
-      return c.json({
-          msg: 'Inputs are incorrect'
-      })
+  if (!success) {
+    c.status(411);
+    return c.json({
+      msg: "Inputs are incorrect",
+    });
   }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
@@ -60,13 +60,13 @@ blogRouter.post("/", async (c) => {
 
 blogRouter.put("/", async (c) => {
   const body = await c.req.json();
-  const {success} = updateBlog.safeParse(body);
+  const { success } = updateBlog.safeParse(body);
 
-  if(!success){
-      c.status(411);
-      return c.json({
-          msg: 'Inputs are incorrect'
-      })
+  if (!success) {
+    c.status(411);
+    return c.json({
+      msg: "Inputs are incorrect",
+    });
   }
   const prisma = new PrismaClient({
     // this use to get the env variable as cloudflare does not get the env vaiable globally
@@ -94,7 +94,18 @@ blogRouter.get("/bulk", async (c) => {
     datasourceUrl: c.env.DATABASE_URL, // typescript does not know the toml file so we have to write type for it
   }).$extends(withAccelerate());
 
-  const blogs = await prisma.blog.findMany();
+  const blogs = await prisma.blog.findMany({
+      select: {
+          content: true,
+          title: true,
+          id: true,
+          author: {
+              select: {
+                  name: true
+              }
+          }
+      }
+  });
 
   return c.json({
     blogs,
@@ -111,9 +122,19 @@ blogRouter.get("/:id", async (c) => {
 
   try {
     const blog = await prisma.blog.findFirst({
+     select: {
+        title : true,
+        content: true,
+        id: true,
+        author: {
+            select: {
+                name: true
+            }
+        }
+     },
       where: {
         id: blogId,
-      },
+      }
     });
     return c.json({
       blog,
