@@ -16,16 +16,31 @@ export const blogRouter = new Hono<{
 
 blogRouter.use("/*", async (c, next) => {
   const token = c.req.header("authorization");
-  const user = await verify(token, c.env.MEDIUM_SECRET);
-
-  if (user) {
-    console.log("user.id", user.id);
-    c.set("userId", user.id);
-    await next();
-  } else {
+  if(!token){
     c.status(403);
     return c.json({
       msg: "User is not logged in",
+    });
+  }
+
+  try {
+      const user = await verify(token, c.env.MEDIUM_SECRET);
+    
+      if (user) {
+        console.log("user.id", user.id);
+        c.set("userId", user.id);
+        await next();
+      } else {
+        c.status(403);
+        return c.json({
+          msg: "User is not logged in",
+        });
+      }
+  }
+  catch(err){
+    c.status(403);
+    return c.json({
+        msg: "User is not logged in",
     });
   }
 });

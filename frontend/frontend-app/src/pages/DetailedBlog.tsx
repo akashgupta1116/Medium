@@ -1,24 +1,36 @@
 import { useEffect, useState } from "react";
 import axios from "../../node_modules/axios/index";
-import { useParams } from "../../node_modules/react-router-dom/dist/index";
+import { useNavigate, useParams } from "../../node_modules/react-router-dom/dist/index";
 import CircularSpinner from "../components/CircularSpinner";
 import FullBlog from "../components/FullBlog";
 
 const DetailedBlog = () => {
+  const navigate = useNavigate()
   const [blogDetail, setBlogDetail] = useState(null);
   const { blogId } = useParams();
 
   const fetchBlogDetail = async () => {
-    const response = await axios.get(
-      "http://localhost:8787/api/v1/blog/" + blogId,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
-
-    setBlogDetail(response.data.blog);
+    try{
+        const response = await axios.get(
+          "http://localhost:8787/api/v1/blog/" + blogId,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        if(response.status !== 200){
+            navigate('/signin')
+            return 
+        }
+    
+        setBlogDetail(response.data.blog);
+    }catch(err){
+        if(err.status === 403){
+            navigate('/signin')
+            return 
+        }
+    }
   };
 
   useEffect(() => {
