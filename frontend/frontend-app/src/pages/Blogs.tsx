@@ -35,8 +35,6 @@ const Blogs = () => {
   }, []);
 
   return (
-    <>
-      <Navbar />
       <div className="w-screen mt-5">
         <div className="w-1/2 m-auto">
           {blogs?.map((item) => {
@@ -52,7 +50,6 @@ const Blogs = () => {
           })}
         </div>
       </div>
-    </>
   );
 };
 

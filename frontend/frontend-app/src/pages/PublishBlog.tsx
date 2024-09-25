@@ -36,8 +36,6 @@ const PublishBlog = () => {
       navigate('/blogs')
   }
   return (
-    <>
-      <Navbar />
       <div className="w-6/12 mt-20 mx-auto">
         <input
           value={blogDetail.title}
@@ -66,7 +64,6 @@ const PublishBlog = () => {
             Publish
         </button>
       </div>
-    </>
   );
 };
 

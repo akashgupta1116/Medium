@@ -1,6 +1,7 @@
 import { Link } from "../../node_modules/react-router-dom/dist/index"
 
 const Navbar = () => {
+    console.log('Navbar')
     return (
         <div className="border p-2 flex justify-between items-center">
             <Link to ="/blogs">
