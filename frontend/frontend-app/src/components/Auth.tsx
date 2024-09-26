@@ -8,7 +8,7 @@ interface AuthProps {
   subheaderText: string;
   altRedirectBtn: React.ReactElement<LinkProps>;
   actionBtn: string;
-  onSubmit: (e: ChangeEvent<HTMLInputElement>) =>void;
+  onSubmit: () =>void ;
   authType: string;
 }
 
