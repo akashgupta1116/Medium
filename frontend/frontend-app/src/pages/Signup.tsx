@@ -8,7 +8,7 @@ const Signup = () => {
 
   const onSubmit = async (obj: SignupInput) => {
     const resp = await axios.post(
-      "http://my-app.yoakash6.workers.dev/api/v1/user/signup",
+      "https://my-app.yoakash6.workers.dev/api/v1/user/signup",
       obj
     );
     console.log('resp-->', resp)

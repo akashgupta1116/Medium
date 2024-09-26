@@ -18,10 +18,10 @@ interface Author {
 const Blogs = () => {
   const [blogs, setBlogs] = useState<BlogType[] | null>(null);
   const navigate = useNavigate();
-  
+
   const fetchBlogs = async () => {
     try{
-        const response = await axios.get("http://my-app.yoakash6.workers.dev/api/v1/blog/bulk", {
+        const response = await axios.get("https://my-app.yoakash6.workers.dev/api/v1/blog/bulk", {
           headers: {
             Authorization: localStorage.getItem("token"),
           },

@@ -24,7 +24,7 @@ const PublishBlog = () => {
   };
 
   const handleSubmit = async() => {
-      await axios.post("http://localhost:8787/api/v1/blog", {
+      await axios.post("https://my-app.yoakash6.workers.dev/api/v1/blog", {
         title: blogDetail.title,
         content: blogDetail.content
           
