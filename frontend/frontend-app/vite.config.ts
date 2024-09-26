@@ -10,8 +10,5 @@ export default defineConfig({
         manualChunks: undefined, // Fixes some chunking issues for SPAs
       },
     },
-  },
-  server: {
-    historyApiFallback: true, // Ensures proper routing in development
-  },
+  }
 })
