@@ -58,6 +58,6 @@ export default App
 
 
 // Introduce Husky 
-// Private Public routes
-// If logged in go to the blogs other wise sinup page
+// Private Public routes -> done
+// If logged in go to the blogs other wise sinup page -> done
 // Study Storybook 
