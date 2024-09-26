@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import React from 'react'
 
 interface PrivateRouteProps {
@@ -6,11 +6,11 @@ interface PrivateRouteProps {
     children: React.ReactNode
 }
 
-const ProtectedRoute = ({isAuthenticated, children}: PrivateRouteProps) => {
-    if(!isAuthenticated){
+const ProtectedRoute = (props : PrivateRouteProps) => {
+    if(!props.isAuthenticated){
         return <Navigate to = "/signin"/>
     }
-    return children
+    return props.children
 }
 
 export default ProtectedRoute

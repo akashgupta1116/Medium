@@ -1,17 +1,17 @@
 
 import Auth from "../components/Auth";
-import { Link, LinkProps, useNavigate } from 'react-router-dom';
-import { signInInput } from "@akashgupta6/medium-common";
+import { Link, useNavigate } from 'react-router-dom';
+import { SignInInput } from "@akashgupta6/medium-common";
 import axios from "axios";
 const Signin = () => {
     const navigate = useNavigate();
 
-    const onSubmit = async(obj: signInInput) => {
+    const onSubmit = async(obj: SignInInput) => {
         const resp = await axios.post(
             "http://localhost:8787/api/v1/user/signin",
             obj
           );
-          localStorage.setItem("token", resp.token);
+          localStorage.setItem("token", resp?.data?.token);
           navigate("/blogs");
     }
     return (

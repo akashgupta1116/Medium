@@ -1,7 +1,7 @@
 import LabelInput from "./LabelInput";
-import React, {useState} from "react";
-import { Link, LinkProps } from "react-router-dom";
-import {signupInput, signInInput} from "@akashgupta6/medium-common"
+import React, {useState, ChangeEvent} from "react";
+import { LinkProps } from "react-router-dom";
+import {SignupInput, SignInInput} from "@akashgupta6/medium-common"
 
 interface AuthProps {
   headerText: string;
@@ -12,18 +12,18 @@ interface AuthProps {
   authType: string;
 }
 
-const signInState: signInInput = {
+const signInState: SignInInput = {
     username: '',
     password: '',
 }
 
-const signUpState: signupInput = {
+const signUpState: SignupInput = {
     username: '',
     password: '',
     name: ''
 }
 
-type formType =  signupInput | signInInput;
+type formType =  SignupInput | SignInInput;
 const Auth = ({
   headerText,
   subheaderText,
@@ -48,7 +48,7 @@ const Auth = ({
             {authType === "signup" && (<LabelInput
               placeholder="Enter your username"
               label="Username"
-              onChange={(e)=>{
+              onChange={(e: ChangeEvent<HTMLInputElement>)=>{
                   setFormInputs({
                       ...formInputs,
                       name: e.target.value
@@ -62,7 +62,7 @@ const Auth = ({
             <LabelInput
                 placeholder="m@example.com"
                 label="Email"
-                onChange={(e)=>{
+                onChange={(e: ChangeEvent<HTMLInputElement>)=>{
                     setFormInputs({
                         ...formInputs,
                         username: e.target.value
@@ -74,7 +74,7 @@ const Auth = ({
             <LabelInput 
                 type = "password"
                 label="Password" 
-                onChange={(e)=>{
+                onChange={(e: ChangeEvent<HTMLInputElement>)=>{
                     setFormInputs({
                         ...formInputs,
                         password: e.target.value

@@ -3,7 +3,6 @@ import { createBrowserRouter, Outlet, RouterProvider } from '../node_modules/rea
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Blogs from './pages/Blogs';
-import FullBlog from './components/FullBlog';
 import DetailedBlog from './pages/DetailedBlog';
 import PublishBlog from './pages/PublishBlog';
 import Navbar from './components/Navbar';

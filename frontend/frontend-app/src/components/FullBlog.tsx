@@ -1,6 +1,3 @@
-import Avatar from "./Avatar"
-import Navbar from "./Navbar"
-
 interface FullBlogProps {
     title: string;
     content: string;

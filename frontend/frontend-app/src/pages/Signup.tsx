@@ -1,12 +1,12 @@
 import Auth from "../components/Auth";
-import { Link, LinkProps, useNavigate } from "react-router-dom";
-import { signupInput } from "@akashgupta6/medium-common";
+import { Link, useNavigate } from "react-router-dom";
+import { SignupInput } from "@akashgupta6/medium-common";
 import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const onSubmit = async (obj: signupInput) => {
+  const onSubmit = async (obj: SignupInput) => {
     const resp = await axios.post(
       "http://localhost:8787/api/v1/user/signup",
       obj

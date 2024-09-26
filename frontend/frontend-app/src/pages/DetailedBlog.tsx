@@ -4,9 +4,19 @@ import { useNavigate, useParams } from "../../node_modules/react-router-dom/dist
 import CircularSpinner from "../components/CircularSpinner";
 import FullBlog from "../components/FullBlog";
 
+interface DetailedBlog {
+    author: Author| null;
+    title: string;
+    content: string
+}
+
+interface Author {
+    name: string
+}
+
 const DetailedBlog = () => {
   const navigate = useNavigate()
-  const [blogDetail, setBlogDetail] = useState(null);
+  const [blogDetail, setBlogDetail] = useState<DetailedBlog | null>(null);
   const { blogId } = useParams();
 
   const fetchBlogDetail = async () => {
@@ -25,7 +35,7 @@ const DetailedBlog = () => {
         }
     
         setBlogDetail(response.data.blog);
-    }catch(err){
+    }catch(err: any){
         if(err.status === 403){
             navigate('/signin')
             return 

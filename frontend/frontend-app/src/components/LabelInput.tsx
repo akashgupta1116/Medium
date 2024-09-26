@@ -1,21 +1,22 @@
+import {ChangeEvent} from "react";
+
 interface LabelInputProps {
   label: string;
-  placeholder: string;
-  onChange: Function;
+  placeholder?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string
 }
 
 const LabelInput = ({ label, placeholder, onChange, type }: LabelInputProps) => {
   return (
-    <div class="mb-6">
+    <div className="mb-6">
       <label
-        for="default-input"
+        htmlFor="default-input"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
         {label}
       </label>
       <input
-        type="text"
         id={label}
         onChange={onChange}
         placeholder={placeholder}
