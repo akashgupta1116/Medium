@@ -22,7 +22,7 @@ const DetailedBlog = () => {
   const fetchBlogDetail = async () => {
     try{
         const response = await axios.get(
-          "http://localhost:8787/api/v1/blog/" + blogId,
+          "http://my-app.yoakash6.workers.dev/api/v1/blog/" + blogId,
           {
             headers: {
               Authorization: localStorage.getItem("token"),

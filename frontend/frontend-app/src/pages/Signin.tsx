@@ -8,7 +8,7 @@ const Signin = () => {
 
     const onSubmit = async(obj: SignInInput) => {
         const resp = await axios.post(
-            "http://localhost:8787/api/v1/user/signin",
+            "http://my-app.yoakash6.workers.dev/api/v1/user/signin",
             obj
           );
           localStorage.setItem("token", resp?.data?.token);
