@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
 import axios from 'axios'
 
@@ -16,7 +16,7 @@ const PublishBlog = () => {
   const navigate = useNavigate()
 
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEventHandler<HTMLTextAreaElement>, key: string | number) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>, key: string | number) => {
     setBlogDetail({
       ...blogDetail,
       [key]: e.target.value,
@@ -51,7 +51,7 @@ const PublishBlog = () => {
           id="message"
           rows={20}
           value={blogDetail.content}
-          onChange={(e: ChangeEventHandler<HTMLTextAreaElement>) => handleChange(e, "content")}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleChange(e, "content")}
           className="block p-2.5 w-full mt-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your thoughts here..."
         ></textarea>
