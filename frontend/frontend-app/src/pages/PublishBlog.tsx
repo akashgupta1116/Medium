@@ -16,7 +16,7 @@ const PublishBlog = () => {
   const navigate = useNavigate()
 
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, key: string | number) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEventHandler<HTMLTextAreaElement>, key: string | number) => {
     setBlogDetail({
       ...blogDetail,
       [key]: e.target.value,
