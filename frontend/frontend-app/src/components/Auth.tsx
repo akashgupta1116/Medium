@@ -8,7 +8,7 @@ interface AuthProps {
   subheaderText: string;
   altRedirectBtn: React.ReactElement<LinkProps>;
   actionBtn: string;
-  onSubmit: () =>void ;
+  onSubmit: (formData: formType) =>void ;
   authType: string;
 }
 
@@ -24,6 +24,7 @@ const signUpState: SignupInput = {
 }
 
 type formType =  SignupInput | SignInInput;
+
 const Auth = ({
   headerText,
   subheaderText,
