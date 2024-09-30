@@ -14,7 +14,7 @@ const PublishBlog = () => {
     content: "",
   });
 
-  const [isPublishing, setIsPublishing] = useState<Boolean>(false)
+  const [isPublishing, setIsPublishing] = useState<boolean>(false)
 
   const navigate = useNavigate()
 
@@ -60,7 +60,6 @@ const PublishBlog = () => {
         ></textarea>
         <Button
             disabled = {isPublishing}
-            type="button"
             onClick = {handleSubmit}
         >
            {isPublishing ? "Publishing" : "Publish"}

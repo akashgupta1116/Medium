@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Signin = () => {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState<Boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const onSubmit = async(obj: SignInInput) => {
         setIsLoading(true)

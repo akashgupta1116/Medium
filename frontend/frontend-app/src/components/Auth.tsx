@@ -94,7 +94,6 @@ const Auth = ({
           </div>
           <Button
             disabled = {isLoading}
-            type="button"
             onClick = {()=>onSubmit(formInputs)}
           >
               {actionBtn}

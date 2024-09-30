@@ -51,7 +51,7 @@ const Blogs = () => {
       return <div className="w-screen mt-5">
         <div className="w-1/2 m-auto">
             {
-                skeletonArr.map((item, idx)=> {
+                skeletonArr.map((_, idx)=> {
                     return <BlogSkeleton key = {idx}/>
                 })
             }
