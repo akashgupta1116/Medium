@@ -1,7 +1,8 @@
 import LabelInput from "./LabelInput";
-import React, {useState, ChangeEvent} from "react";
-import { LinkProps } from "react-router-dom";
+import React, {useState, ChangeEvent, useEffect} from "react";
+import { LinkProps, useNavigate } from "react-router-dom";
 import {SignupInput, SignInInput} from "@akashgupta6/medium-common"
+import Button from "./Button";
 
 interface AuthProps {
   headerText: string;
@@ -10,6 +11,7 @@ interface AuthProps {
   actionBtn: string;
   onSubmit: (formData: formType) =>void ;
   authType: string;
+  isLoading?: boolean
 }
 
 const signInState: SignInInput = {
@@ -32,9 +34,16 @@ const Auth = ({
   actionBtn,
   onSubmit,
   authType,
+  isLoading
 }: AuthProps) => {
-    
-    const [formInputs, setFormInputs] = useState<formType>(authType === "signup" ? signUpState: signInState)
+    const navigate = useNavigate();
+
+    const [formInputs, setFormInputs] = useState<formType>(authType === "signup" ? signUpState: signInState);
+    useEffect(()=> {
+        if(localStorage.getItem('token')){
+            navigate('/blogs')
+        }
+    }, [])
   return (
     <div className="grid grid-cols-2 w-screen">
       <div className="h-screen content-center">
@@ -83,13 +92,13 @@ const Auth = ({
                 }}
             />
           </div>
-          <button
+          <Button
+            disabled = {isLoading}
             type="button"
             onClick = {()=>onSubmit(formInputs)}
-            className="w-full h-12 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           >
-            {actionBtn}
-          </button>
+              {actionBtn}
+          </Button>
         </div>
       </div>
       <div className="bg-slate-200 h-screen content-center">
